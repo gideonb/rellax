@@ -220,8 +220,10 @@
       if (self.options.frame) {
         var frame = self.options.frame
         var frameHeight = frame.clientHeight || frame.offsetHeight || frame.scrollHeight;
-        var overlap = blockHeight - frameHeight;
-        speed = overlap/100;
+        var frameWidth = frame.clientWidth || frame.offsetWidth || frame.scrollWidth;
+        var overlapY = blockHeight - frameHeight;
+        var overlapX = blockWidth - frameWidth;
+        speed = overlapY/100
       }
 
       var bases = updatePosition(percentageX, percentageY, speed);
@@ -261,7 +263,9 @@
         transform: transform,
         zindex: dataZindex,
         min: dataMin,
-        max: dataMax
+        max: dataMax,
+        overlapY: overlapY,
+        overlapX: overlapX
       };
     };
 
@@ -342,11 +346,17 @@
     var animate = function() {
       var positions;
       for (var i = 0; i < self.elems.length; i++){
-        var percentageY = ((posY - blocks[i].top + screenY) / (blocks[i].height + screenY));
-        var percentageX = ((posX - blocks[i].left + screenX) / (blocks[i].width + screenX));
-
+        if (self.options.frame) {
+          var percentageY = ((posY - blocks[i].top - blocks[i].overlapY/2 + screenY) / (blocks[i].height - blocks[i].overlapY + screenY));
+          var percentageX = ((posX - blocks[i].left + screenX) / (blocks[i].width + screenX));
+          positions = updatePosition(percentageX, percentageY, blocks[i].speed);// - blocks[i].baseX;
+        }
+        else{
+          var percentageY = ((posY - blocks[i].top + screenY) / (blocks[i].height + screenY));
+          var percentageX = ((posX - blocks[i].left + screenX) / (blocks[i].width + screenX));
+          positions = updatePosition(percentageX, percentageY, blocks[i].speed);// - blocks[i].baseX;
+        }
         // Subtracting initialize value, so element stays in same spot as HTML
-        positions = updatePosition(percentageX, percentageY, blocks[i].speed);// - blocks[i].baseX;
         var positionY = positions.y - blocks[i].baseY;
         var positionX = positions.x - blocks[i].baseX;
 
