@@ -221,7 +221,10 @@
         var frame = self.options.frame
         var frameHeight = frame.clientHeight || frame.offsetHeight || frame.scrollHeight;
         var overlap = blockHeight - frameHeight;
-        speed = overlap/100;
+        var backwards = blockHeight / (frameHeight-blockHeight);
+        speed = (overlap)/100 * -1;
+        dataMin = (overlap/2) * -1;
+        dataMax = overlap/2;
       }
 
       var bases = updatePosition(percentageX, percentageY, speed);
