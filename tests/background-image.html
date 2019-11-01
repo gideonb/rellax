@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <style>
+        html, body {
+          color: #223;
+    			font-size: 21pt;
+    			margin: 0; padding: 0;
+        }
+
+        .col {
+          text-align: center;
+          width: 50%;
+          float: left;
+          box-sizing: border-box;
+          padding: 10px
+        }
+        .spacer {
+          padding-top: 90vh
+        }
+
+        h4, p{
+          text-align: center;
+        }
+
+        .container {
+          display: flex;
+          align-items: center;
+          outline: 1px solid red;
+          font-size: 42pt;
+          height: 50vh;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .container--tall {
+          height: 90vh;
+        }
+        .container--tall .scale{
+          min-height: 130%;
+        }
+
+        .container--full .scale{
+          min-height: 100%;
+        }
+
+        .frame{
+          position: relative;
+          overflow: hidden;
+          width: 100%;
+          height: 100%;
+        }
+        .pane{
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          display: flex;
+          align-items: center;
+        }
+        .scale{
+          position: relative;
+          display: block;
+          width: 100%;
+          min-height: 155%;
+        }
+        .image{
+          display: block;
+          background: linear-gradient(0deg,
+            rgba(255,0,0,1) 0%,
+            rgba(0,0,0,1) 5%,
+            rgba(255,0,255,1) 10%,
+            rgba(0,0,0,1) 15%,
+            rgba(255,255,255,1) 20%,
+            rgba(0,0,0,1) 25%,
+            rgba(255,255,255,1) 30%,
+            rgba(0,0,0,1) 35%,
+            rgba(255,255,255,1) 40%,
+            rgba(0,0,0,1) 45%,
+            rgba(0,0,255,1) 50%,
+            rgba(0,0,0,1) 55%,
+            rgba(255,255,255,1) 60%,
+            rgba(0,0,0,1) 65%,
+            rgba(255,255,255,1) 70%,
+            rgba(0,0,0,1) 75%,
+            rgba(255,255,255,1) 80%,
+            rgba(0,0,0,1) 85%,
+            rgba(255,0,255,1) 90%,
+            rgba(0,0,0,1) 95%,
+            rgba(255,0,0,1) 100%);
+          background-size: cover;
+          background-position: center center;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 1;
+        }
+    </style>
+</head>
+<body>
+  <h4>Background image in frame</h4>
+  <section>
+    <p>Full width bg</p>
+    <div class="container">
+      <div class="frame">
+        <div class="pane">
+          <div class="scale">
+            <div class="image rellax"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <p>Tall image with fast overlap</p>
+    <div class="container container--tall">
+      <div class="frame">
+        <div class="pane">
+          <div class="scale">
+            <div class="image rellax"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <p>Image with no overlap</p>
+    <div class="container container--full">
+      <div class="frame">
+        <div class="pane">
+          <div class="scale">
+            <div class="image rellax"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="col">
+      <p>Image half bg</p>
+      <div class="container">
+        <div class="frame">
+          <div class="pane">
+            <div class="scale">
+              <div class="image rellax"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <p>Image half bg</p>
+      <div class="container">
+        <div class="frame">
+          <div class="pane">
+            <div class="scale">
+              <div class="image rellax"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <p>(fin)</p>
+  </section>
+
+    <!-- Scripts -->
+    <script src="../rellax.js"></script>
+    <script>
+      var parallaxSelector = document.querySelectorAll('.rellax');
+      for (let i = 0; i < parallaxSelector.length; i++) {
+        var frame = parallaxSelector[i].closest('.frame')
+        var rellax = new Rellax(parallaxSelector[i], {
+            center: true,
+            round: true,
+            frame: frame
+        });
+      }
+    </script>
+</body>
+</html>

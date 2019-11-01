@@ -84,6 +84,7 @@
       relativeToWrapper: false,
       round: true,
       vertical: true,
+      frame: null,
       horizontal: false,
       callback: function() {},
     };
@@ -123,6 +124,20 @@
           self.options.wrapper = wrapper;
         } else {
           console.warn("Rellax: The wrapper you're trying to use doesn't exist.");
+          return;
+        }
+      }
+    }
+
+    // Has a frame and it exists
+    if (self.options.frame) {
+      if (!self.options.frame.nodeType) {
+        var frame = document.querySelector(self.options.frame);
+
+        if (frame) {
+          self.options.frame = frame;
+        } else {
+          console.warn("Rellax: The frame you're trying to use doesn't exist.");
           return;
         }
       }
@@ -201,6 +216,13 @@
 
       // Optional individual block speed as data attr, otherwise global speed
       var speed = dataSpeed ? dataSpeed : self.options.speed;
+
+      if (self.options.frame) {
+        var frame = self.options.frame
+        var frameHeight = frame.clientHeight || frame.offsetHeight || frame.scrollHeight;
+        var overlap = blockHeight - frameHeight;
+        speed = overlap/100;
+      }
 
       var bases = updatePosition(percentageX, percentageY, speed);
 
