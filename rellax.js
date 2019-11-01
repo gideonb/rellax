@@ -218,10 +218,47 @@
       var speed = dataSpeed ? dataSpeed : self.options.speed;
 
       if (self.options.frame) {
+
+
+        // console.log('================BACKWARDS===================');
+        // var frame = self.options.frame
+        // var frameHeight = frame.clientHeight || frame.offsetHeight || frame.scrollHeight;
+        //
+        // var overlap = blockHeight - frameHeight;
+        // var backwards = blockHeight / (frameHeight-blockHeight);
+        //
+        // speed = (overlap)/100 * backwards;
+        // console.log(`overlap = blockHeight - frameHeight`)
+        // console.log(`overlap ${overlap} = blockHeight ${blockHeight} - frameHeight ${frameHeight}`);
+        // console.log(`overlap ${overlap} ratio: ${backwards}`);
+        // console.log(`backwards: ${backwards}`);
+        // console.log(`screenY: ${screenY}`);
+        // console.log(`speed: ${speed}`);
+        // console.log('=========================================================');
+        // console.log('');
+
+
+
+
+
+
+        console.log('================Forwards===================');
         var frame = self.options.frame
         var frameHeight = frame.clientHeight || frame.offsetHeight || frame.scrollHeight;
+
         var overlap = blockHeight - frameHeight;
+        var ratio = blockHeight / frameHeight;
+        var ratioRoot = Math.sqrt(ratio)
+
         speed = overlap/100;
+        console.log(`overlap = blockHeight - frameHeight`)
+        console.log(`overlap ${overlap} = blockHeight ${blockHeight} - frameHeight ${frameHeight}`);
+        console.log('');
+        console.log(`ratio: ${ratio}`);
+        console.log(`ratioRoot: ${ratioRoot}`);
+        console.log(`speed: ${speed}`);
+        console.log('=========================================================');
+        console.log('');
       }
 
       var bases = updatePosition(percentageX, percentageY, speed);
