@@ -30,27 +30,32 @@
         .container {
           display: flex;
           align-items: center;
-          outline: 1px solid red;
+          outline: 5px solid rebeccapurple;
           font-size: 42pt;
           height: 50vh;
           position: relative;
-          overflow: hidden;
+          overflow: visible;
         }
 
-        .container--tall {
-          height: 90vh;
+        .container--130 {
+          height: 60vh;
         }
-        .container--tall .scale{
+        .container--130 .scale{
           min-height: 130%;
         }
 
-        .container--full .scale{
+        .container--100 .scale{
           min-height: 100%;
+        }
+
+        .container--180 .scale{
+          height: 70vh;
+          min-height: 180%;
         }
 
         .frame{
           position: relative;
-          overflow: hidden;
+          overflow: visible;
           width: 100%;
           height: 100%;
         }
@@ -101,14 +106,14 @@
           position: absolute;
           top: 0;
           left: 0;
-          z-index: 1;
+          z-index: -1;
         }
     </style>
 </head>
 <body>
   <h4>Background image in frame</h4>
   <section>
-    <p>Full width bg</p>
+    <p>Container - default 155%</p>
     <div class="container">
       <div class="frame">
         <div class="pane">
@@ -121,8 +126,8 @@
 
     <div class="spacer"></div>
 
-    <p>Tall image with fast overlap</p>
-    <div class="container container--tall">
+    <p>container--130 - 130%</p>
+    <div class="container container--130">
       <div class="frame">
         <div class="pane">
           <div class="scale">
@@ -134,8 +139,21 @@
 
     <div class="spacer"></div>
 
-    <p>Image with no overlap</p>
-    <div class="container container--full">
+    <p>container--100  no overlap</p>
+    <div class="container container--100">
+      <div class="frame">
+        <div class="pane">
+          <div class="scale">
+            <div class="image rellax"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <p>container--180 - 180%</p>
+    <div class="container container--180">
       <div class="frame">
         <div class="pane">
           <div class="scale">
@@ -148,7 +166,7 @@
     <div class="spacer"></div>
 
     <div class="col">
-      <p>Image half bg</p>
+      <p>Split - 155%</p>
       <div class="container">
         <div class="frame">
           <div class="pane">
@@ -160,7 +178,7 @@
       </div>
     </div>
     <div class="col">
-      <p>Image half bg</p>
+      <p>Split - 155%</p>
       <div class="container">
         <div class="frame">
           <div class="pane">
@@ -171,6 +189,14 @@
         </div>
       </div>
     </div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
     <div class="spacer"></div>
     <div class="spacer"></div>
     <p>(fin)</p>
@@ -188,6 +214,11 @@
             frame: frame
         });
       }
+
+
+      // speed is going to be rellax/frameheight
+      // we should set the explicit width to the width of the container
+      // height shoudl at a minimum be 120% but no upper cap on height for tall aspect ratio images
     </script>
 </body>
 </html>
