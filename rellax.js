@@ -271,7 +271,24 @@
         // Stop animating when scroll past the element
         if (frameBottom < posY || frameTop > posY + screenY) return;
 
-        var positionY = -(posY + screenY - frameTop) * (overlap / (frameHeight + screenY)) + overlap / 2;
+        var body = document.body;
+        var html = document.documentElement;
+        var pageHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+        var maxScreenY = screenY;
+        var minScreenY = screenY;
+        var limitTop = frameTop < screenY;
+        var limitBottom = pageHeight - frameBottom < screenY;
+        var positionY = 0;
+
+        if (limitTop) {
+          maxScreenY = frameTop;
+          positionY = -(posY + maxScreenY - frameTop) * (overlap / (frameHeight + maxScreenY)) + overlap / 2;
+        } else if (limitBottom) {
+          minScreenY = pageHeight - frameBottom;
+          positionY = -(posY + screenY - frameTop) * (overlap / (frameHeight + minScreenY)) + overlap / 2;
+        } else {
+          positionY = -(posY + screenY - frameTop) * (overlap / (frameHeight + screenY)) + overlap / 2;
+        }
 
         var zindex = blocks[i].zindex;
 
